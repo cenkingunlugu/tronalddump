@@ -1,0 +1,21 @@
+<span class="info" *ngIf="isLoading">Loading quotes</span>
+<div class="loader" *ngIf="isLoading"></div>
+<div class="actions" *ngIf="!isLoading">
+    <button type="button" (click)="getPageObjects()" class="btn btn-primary">Reload</button>
+    <button type="button" (click)="shuffleQuotes()" class="btn btn-info">Shuffle</button>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <ul *ngIf="!isLoading">
+            <li *ngFor="let quote of quotes">
+                <a href=""><blockquote>{{ quote.value }}</blockquote></a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <ng-container *ngIf="!isLoading">
+            <h2>Tags:</h2>
+            <span class="badge badge-pill" [class.badge-info]="!tag.disabled" [class.badge-secondary]="tag.disabled" *ngFor="let tag of tags">{{tag.value}}</span>
+        </ng-container>
+    </div>
+</div>
