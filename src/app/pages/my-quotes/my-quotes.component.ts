@@ -9,17 +9,36 @@ import { Router } from '@angular/router';
 import { Subscription, merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+/**
+ * My quotes component
+ */
 @Component({
   selector: 'app-my-quotes',
   templateUrl: './my-quotes.component.html',
   styleUrls: ['./my-quotes.component.scss']
 })
 export class MyQuotesComponent implements OnInit, OnDestroy {
-
+  /**
+   * constructor method
+   * @param store instance to select
+   * @param router instance to navigate
+   */
   constructor(private store: Store<State>, private router: Router) { }
+  /**
+   * List of my quotes
+   */
   quotes: QuoteModel[];
+  /**
+   * Loading indicator
+   */
   isLoading: boolean;
+  /**
+   * Main subscription for all streams
+   */
   mainSubscription: Subscription;
+  /**
+   * Initialization method
+   */
   ngOnInit() {
     this.isLoading = true;
     const userStream = this.store.select(loginReducers.selectLoginState).pipe(tap((state) => {
@@ -33,6 +52,9 @@ export class MyQuotesComponent implements OnInit, OnDestroy {
     }));
     this.mainSubscription = merge(userStream, myQuotesStream).subscribe();
   }
+  /**
+   * Component destroy handler
+   */
   ngOnDestroy() {
     if (this.mainSubscription) {
       this.mainSubscription.unsubscribe();

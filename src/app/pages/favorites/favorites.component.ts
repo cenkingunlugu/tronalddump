@@ -9,17 +9,36 @@ import { Router } from '@angular/router';
 import { Subscription, merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+/**
+ * Favorites component
+ */
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit, OnDestroy {
-
+  /**
+   * constructor method
+   * @param store Store instance to select
+   * @param router Router instance to navigate
+   */
   constructor(private store: Store<State>, private router: Router) { }
+  /**
+   * List of favorite quotes
+   */
   quotes: QuoteModel[];
+  /**
+   * Loading indicator
+   */
   isLoading: boolean;
+  /**
+   * Main subscription
+   */
   mainSubscription: Subscription;
+  /**
+   * Initialization method
+   */
   ngOnInit() {
     this.isLoading = true;
     const userStream = this.store.select(loginReducers.selectLoginState).pipe(tap((state) => {
@@ -33,6 +52,9 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     }));
     this.mainSubscription = merge(userStream, favoritesStream).subscribe();
   }
+  /**
+   * method running on destroy of the component
+   */
   ngOnDestroy() {
     if (this.mainSubscription) {
       this.mainSubscription.unsubscribe();

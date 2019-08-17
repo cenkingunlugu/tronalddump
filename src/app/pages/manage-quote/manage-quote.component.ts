@@ -15,6 +15,9 @@ import { Update } from '@ngrx/entity';
 import { tap } from 'rxjs/operators';
 import { merge } from 'rxjs';
 
+/**
+ * Component to add, update MyQuotes
+ */
 @Component({
   selector: 'app-manage-quote',
   templateUrl: './manage-quote.component.html',
@@ -24,10 +27,16 @@ export class ManageQuoteComponent implements OnInit {
 
   /**
    * Constructor method
-   * @param fb FormBuilder instance for use
+   * @param fb FormBuilder instance to use
+   * @param store Store instance to use
+   * @param router Router instance to use
+   * @param route ActivatedRoute instance to use
    */
   constructor(private fb: FormBuilder, private store: Store<State>, private router: Router, private route: ActivatedRoute) { }
 
+  /**
+   * quote to handle
+   */
   quote: QuoteModel;
   /**
    * Delimiter to check if is add or edit mode.
@@ -49,7 +58,9 @@ export class ManageQuoteComponent implements OnInit {
    * Flag to see if quote is favorited
    */
   isQuoteFavorited = false;
-
+  /**
+   * Component initialization method
+   */
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!id;
@@ -78,18 +89,25 @@ export class ManageQuoteComponent implements OnInit {
       merge(userQuoteStream, favoriteQuoteStream).subscribe();
     }
   }
-
+  /**
+   * Form initialization method
+   */
   initializeForm() {
     this.formGroup = this.fb.group({
       value: new FormControl(this.quote.value, [Validators.required, Validators.minLength(100), Validators.maxLength(255)]),
       tags: new FormControl(this.quote.tags.join(', '), [Validators.required, Validators.pattern(/^\w+(,(|\s)\w+)*$/)]),
     });
   }
-
+  /**
+   * Unique id generator for new quotes
+   */
   getUniqueId() {
     return uuid.v4();
   }
 
+  /**
+   * Form submit handler
+   */
   submit() {
     this.isSubmitted = true;
     if (this.formGroup.valid) {

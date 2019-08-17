@@ -1,20 +1,36 @@
 import { Component, OnInit, OnDestroy, Input, ElementRef } from '@angular/core';
 import { ModalService } from 'src/app/services/modal/modal.service';
 
+/**
+ * Modal component
+ */
 @Component({
   selector: 'app-trump-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit, OnDestroy {
+  /**
+   * id input for the modal
+   */
   @Input() id: string;
+  /**
+   * ElementRef's native element
+   */
   private element: any;
-
+  /**
+   * constructor method
+   * @param modalService to add or remove
+   * @param el ElementRef to get native element
+   */
   constructor(private modalService: ModalService, private el: ElementRef) {
       this.element = el.nativeElement;
   }
 
-  ngOnInit(): void {
+  /**
+   * Initialization method
+   */
+  ngOnInit() {
       // ensure id attribute exists
       if (!this.id) {
           console.error('modal must have an id');
@@ -35,20 +51,27 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.modalService.add(this);
   }
 
-  // remove self from modal service when component is destroyed
-  ngOnDestroy(): void {
+  /**
+   * Destroy method
+   * removes self from modal service when component is destroyed
+   */
+  ngOnDestroy() {
       this.modalService.remove(this.id);
       this.element.remove();
   }
 
-  // open modal
-  open(): void {
+  /**
+   * Modal opener method
+   */
+  open() {
       this.element.style.display = 'block';
       document.body.classList.add('trump-modal-open');
   }
 
-  // close modal
-  close(): void {
+  /**
+   * Modal closer method
+   */
+  close() {
       this.element.style.display = 'none';
       document.body.classList.remove('trump-modal-open');
   }

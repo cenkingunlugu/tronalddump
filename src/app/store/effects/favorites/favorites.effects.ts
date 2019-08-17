@@ -8,10 +8,21 @@ import * as favoriteReducers from '../../reducers/favorites/favorites.reducer';
 import * as memeActions from '../../actions/meme/meme.actions';
 
 import { State } from '../../reducers';
-
+/**
+ * Maximum count to be added to favorites
+ */
 const MAX_FAVORITES_COUNT = 45;
+
+/**
+ * Favorites effects
+ */
 @Injectable()
 export class FavoritesEffects {
+  /**
+   * Constructor method
+   * @param actions Actions to be used
+   * @param store Store to interact
+   */
   constructor(private actions: Actions, private store: Store<State>) {}
   /**
    * Effect to add quote to the favorites

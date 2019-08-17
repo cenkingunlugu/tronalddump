@@ -1,7 +1,12 @@
-import { Interpolation } from '@angular/compiler';
-
+/**
+ * Base model class
+ */
 export class BaseModel {
     [prop: string]: any;
+    /**
+     * deserialization method
+     * @param input any thing to deserialize
+     */
     deserialize(input: any) {
         if (input.quote_id) {
             input.quoteId = input.quote_id;

@@ -6,12 +6,16 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { UserService, UserResponse } from 'src/app/services/user/user.service';
 import { Action } from '@ngrx/store';
 
-
+/**
+ * Login effects
+ */
 @Injectable()
 export class LoginEffects {
-
-
-
+  /**
+   * Constructor method
+   * @param actions Actions to deal with
+   * @param userService UserService to interact for login
+   */
   constructor(private actions: Actions, private userService: UserService) {}
 
   /**

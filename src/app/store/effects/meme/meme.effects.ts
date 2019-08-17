@@ -6,7 +6,9 @@ import { switchMap, map, catchError, delay } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 
 import * as memeActions from '../../actions/meme/meme.actions';
-
+/**
+ * Meme effects
+ */
 @Injectable()
 export class MemeEffects {
 

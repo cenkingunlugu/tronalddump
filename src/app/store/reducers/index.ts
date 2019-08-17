@@ -18,19 +18,46 @@ export const STORE_KEYS_TO_PERSIST = [
   loginReducer.loginFeatureKey, favoritesReducer.favoritesFeatureKey, myQuotesReducer.myQuotesFeatureKey
 ];
 
-
-// tslint:disable-next-line:no-empty-interface
+/**
+ * Interface for whole State
+ */
 export interface State {
+  /**
+   * login state
+   */
   login: loginReducer.LoginState;
+  /**
+   * favorites state
+   */
   favorites: favoritesReducer.FavoritesState;
+  /**
+   * meme state
+   */
   meme: memesReducer.MemeState;
+  /**
+   * my quotes state
+   */
   myQuotes: myQuotesReducer.MyQuotesState;
 }
-
+/**
+ * Reducers for whole State
+ */
 export const reducers: ActionReducerMap<State> = {
+  /**
+   * login reducer
+   */
   login: loginReducer.reducer,
+  /**
+   * favorites reducer
+   */
   favorites: favoritesReducer.reducer,
+  /**
+   * meme reducer
+   */
   meme: memesReducer.reducer,
+  /**
+   * myQuotes reducer
+   */
   myQuotes: myQuotesReducer.reducer
 };
 

@@ -4,6 +4,10 @@ import { QuoteModel } from 'src/app/models/quote.model';
 
 import * as myQuotesActions from '../../actions/my-quotes/my-quotes.actions';
 import { State } from '..';
+
+/**
+ * feature key for myQuotes
+ */
 export const myQuotesFeatureKey = 'myQuotes';
 
 /**
@@ -31,9 +35,16 @@ export const getMyQuotesEntitiesState = createSelector(
   state => Object.keys(state.entities).map(id => state.entities[id])
 );
 
+/**
+ * Entity getter by id
+ * @param id id of the entity
+ */
 export const getEntityById = (id: string) => (state: MyQuotesState) => state.entities[id];
+/**
+ * Favorite selector by id
+ * @param id id of the entity
+ */
 export const getUserEntityById = (id: string) => createSelector(getMyQuotesState, getEntityById(id));
-
 
 /**
  * Initial state
@@ -42,6 +53,11 @@ export const initialState: MyQuotesState = {
   ...myQuotesAdapter.getInitialState()
 } ;
 
+/**
+ * reducer function
+ * @param state MyQuotesState to deal with
+ * @param action Action related to MyQuotesState
+ */
 export function reducer(state = initialState, action: myQuotesActions.MyQuotesActions): MyQuotesState {
   switch (action.type) {
     case myQuotesActions.MyQuotesActionTypes.ADD_ONE:

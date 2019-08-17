@@ -4,6 +4,10 @@ import { QuoteModel } from 'src/app/models/quote.model';
 
 import * as favoriteActions from '../../actions/favorites/favorites.actions';
 import { State } from '..';
+
+/**
+ * Favorites feature key :)
+ */
 export const favoritesFeatureKey = 'favorites';
 
 /**
@@ -31,7 +35,15 @@ export const getFavoritesEntitiesState = createSelector(
   state => Object.keys(state.entities).map(id => state.entities[id])
 );
 
+/**
+ * Entity getter by id
+ * @param id id of the entity
+ */
 export const getEntityById = (id: string) => (state: FavoritesState) => state.entities[id];
+/**
+ * Favorite selector by id
+ * @param id id of the entity
+ */
 export const getFavoriteEntityById = (id: string) => createSelector(getFavoritesState, getEntityById(id));
 
 
@@ -42,6 +54,11 @@ export const initialState: FavoritesState = {
   ...favoritesAdapter.getInitialState()
 } ;
 
+/**
+ * reducer function
+ * @param state FavoritesState to deal with
+ * @param action Action related to FavoritesState
+ */
 export function reducer(state = initialState, action: favoriteActions.FavoritesActions): FavoritesState {
   switch (action.type) {
     case favoriteActions.FavoritesActionTypes.ADD_ONE_SUCCEED:
