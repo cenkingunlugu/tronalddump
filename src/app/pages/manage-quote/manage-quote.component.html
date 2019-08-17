@@ -1,0 +1,22 @@
+<h2><ng-container *ngIf="isEditMode">Edit</ng-container><ng-container *ngIf="!isEditMode">Add</ng-container> Quote:</h2>
+<p *ngIf="!isQuoteAvailable">This quote is not available.</p>
+<form [formGroup]="formGroup" *ngIf="formGroup">
+    <div class="form-group">
+        <label for="value">Value:</label>
+        <input type="text" formControlName="value" name="value" class="form-control" placeholder="write your quote">
+        <div class="invalid-feedback" [class.visible]="isSubmitted && formGroup.controls['value'].hasError('required')">Value is required</div>
+        <div class="invalid-feedback" [class.visible]="isSubmitted && formGroup.controls['value'].hasError('minlength')">Minimum text length should be 100.</div>
+        <div class="invalid-feedback" [class.visible]="isSubmitted && formGroup.controls['value'].hasError('maxlength')">Maximum text length can be 255.</div>
+    </div>
+   
+    <div class="form-group">
+        <label for="tags">Tags:</label>
+        <input type="text" formControlName="tags" name="tags" class="form-control" placeholder="comma, seperated, tags">
+        <small id="tagsHelp" class="form-text text-muted">Comma seperated tags.</small>
+        <div class="invalid-feedback" [class.visible]="isSubmitted && formGroup.controls['tags'].hasError('required')">At least 1 tag is required</div>
+        <div class="invalid-feedback" [class.visible]="isSubmitted && formGroup.controls['tags'].hasError('pattern')">Tags should be comma-seperated (like, this, one)</div>
+
+    </div>
+    
+    <button type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
+</form>

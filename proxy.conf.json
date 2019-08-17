@@ -7,5 +7,14 @@
         },
         "changeOrigin": true,
         "logLevel": "info"
+    },
+    "/userapi": {
+        "target": "http://localhost:3000/",
+        "secure": false,
+        "pathRewrite": {
+            "^/userapi": ""
+        },
+        "changeOrigin": true,
+        "logLevel": "info"
     }
 }

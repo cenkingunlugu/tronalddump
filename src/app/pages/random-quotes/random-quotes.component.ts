@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuotesService } from '../../services/quotes.service';
+import { QuotesService } from '../../services/quotes/quotes.service';
 import { tap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { QuoteModel } from 'src/app/models/quote.model';
@@ -14,11 +14,10 @@ export interface ITag {
   styleUrls: ['./random-quotes.component.scss']
 })
 export class RandomQuotesComponent implements OnInit {
+  constructor(private quotesService: QuotesService) {}
   quotes: QuoteModel[];
   tags: ITag[];
   isLoading: boolean;
-  constructor(private quotesService: QuotesService) {
-  }
   getPageObjects() {
     this.isLoading = true;
 

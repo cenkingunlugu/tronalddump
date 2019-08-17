@@ -1,1 +1,19 @@
-<p>quote-detail works!</p>
+<div class="actions" *ngIf="quote">
+    <button type="button" (click)="goBack()" class="btn btn-primary">Back</button>
+</div>
+<div class="card">
+    <div class="card-body">
+        <ng-container *ngIf="quote">
+            <h5 class="card-title">{{quote.created_at | date: 'medium'}}</h5>
+            <p class="card-text">
+                {{quote.value}}
+            </p>
+            <section class="tags">
+                Tags: <span class="badge badge-pill badge-info" *ngFor="let tag of quote.tags">{{tag}}</span>
+            </section>
+        </ng-container>
+        <h5 *ngIf="!quote" class="card-title">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </h5>
+    </div>
+</div>

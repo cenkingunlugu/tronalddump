@@ -1,0 +1,4 @@
+<h2>My Quotes: <a routerLink="/manage-quote"  class="btn btn-primary">Add New</a></h2>
+<span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+<app-quote-list [isMyQuotes]="true" *ngIf="!isLoading" [quotes]="quotes"></app-quote-list>
+<h3 *ngIf="quotes && quotes.length === 0">No saved quotes found.</h3>

@@ -1,0 +1,8 @@
+:host {
+    form {
+        text-align: left;
+        .invalid-feedback.visible {
+            display: block;
+        }
+    }
+}

@@ -1,7 +1,37 @@
-<div class="section">
-  <h1 class="title">
-    {{ title }}
-  </h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/random-quotes">{{title}}</a>
+  <button class="navbar-toggler" (click)="isMenuCollapsed = !isMenuCollapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse" [class.collapse]="isMenuCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+        true}">
+        <a class="nav-link" routerLink="/random-quotes">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf="user" routerLinkActive="active" >
+        <a class="nav-link" routerLink="/favorites">Favorites</a>
+      </li>
+      <li class="nav-item" *ngIf="user" routerLinkActive="active" >
+          <a class="nav-link" routerLink="/my-quotes">My Quotes</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item" *ngIf="!user">
+          <a class="nav-link" title="Log in!" routerLink="/login"><span class="fa fa-user"></span> Login</a>
+        </li>
+        <li class="nav-item" *ngIf="user">
+            <a (click)="logOut($event)" title="Log out :(" class="log-out"><span class="fa fa-sign-out"></span></a> {{ user.firstname }} {{user.lastname}}
+          </li>
+      </ul>
+  </div>
+</nav>
+<app-trump-modal id="kim-modal">
+  <h1>Surprise! Guess what?</h1>
+  <p><img src="../assets/images/1200-trump-tariffs.jpg" alt="Steel from China!"></p>
+  <button type="button" class="btn btn-primary" (click)="closeModal('kim-modal');">Close</button>
+</app-trump-modal>
+<div class="section" appSurprise (surprise)="showSurprise()">
   <img width="300" alt="Angular Logo" srcset="./assets/images/logo.png 1x, ./assets/images/logo@2x.png 2x">
   <div class="container">
       <router-outlet></router-outlet>

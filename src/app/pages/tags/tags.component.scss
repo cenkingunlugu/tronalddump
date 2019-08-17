@@ -1,0 +1,55 @@
+:host {
+    $transition_time:.2s;
+    ::ng-deep {
+        .carousel {
+            ul.indicators {
+                bottom: -0.75rem !important;
+                position: relative !important;
+            }
+            .direction {
+                top: -60px !important;
+            }
+        }
+    }
+    .carousel {
+        .card-text {
+            padding: 0 10px;
+        }
+        .content {
+            display: flex;
+            position: relative;
+            height: 200px;
+            .item {
+                width: 100%;
+                display: block;
+                opacity: 0.5;
+                transition: opacity 0.295s linear $transition_time;
+                &.visible {
+                    opacity: 1;
+                }
+            }
+        }
+        .ball {
+            width: 10px;
+            height: 10px;
+            position: relative;
+            border-radius: 50%;
+            background: black;
+            border: 2px solid;
+            opacity: 0.5;
+            &.visible {
+                opacity: 1;
+            }
+        }
+
+        .click-area {
+            width: 50px;
+            text-align: center;
+
+            i {
+                font-size: 3em;
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,4 @@
+<h2>Favorites:</h2>
+<span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+<app-quote-list *ngIf="!isLoading" [quotes]="quotes"></app-quote-list>
+<h3 *ngIf="quotes && quotes.length === 0">No favorites found.</h3>

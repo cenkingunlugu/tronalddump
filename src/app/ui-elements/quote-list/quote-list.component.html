@@ -1,0 +1,14 @@
+<ul *ngIf="quotes">
+    <li *ngFor="let quote of quotes">
+        <a *ngIf="!isMyQuotes" routerLink="/quote/{{quote.quoteId}}"><blockquote>{{ quote.value }}</blockquote></a>
+        <blockquote *ngIf="isMyQuotes">{{ quote.value }}</blockquote>
+        <a (click)="favoriteQuote(quote)" class="favorite" [class.is-favorite]="favoriteQuoteIds.indexOf(quote.quoteId) > -1" *ngIf="isUserLoggedIn && !isMyQuotes"><i class="fa fa-thumbs-up"></i></a>
+        <a class="tweet-button" href="https://twitter.com/intent/tweet/?text={{quote.value}}&hashtags=TronaldDump" 
+   target="_blank"><i class="fa fa-twitter"></i> Share on Twitter</a><a *ngIf="isMyQuotes" routerLink="/manage-quote/{{quote.quoteId}}" class="btn btn-primary">Edit</a><a *ngIf="isMyQuotes" (click)="removeMyQuote(quote)" class="btn btn-secondary">Remove</a>
+    </li>
+</ul>
+<app-trump-modal id="fake-modal">
+    <h1>Aww snap! Fake News!</h1>
+    <p><img class="modal-image" [src]="memeUrl" /></p>
+    <button type="button" class="btn btn-primary" (click)="closeModal('fake-modal');">Close</button>
+</app-trump-modal>

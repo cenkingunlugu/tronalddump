@@ -1,0 +1,49 @@
+<h2>Tags for: {{tagName}}</h2>
+<span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+<app-quote-list *ngIf="!isLoading && !isMobile" [quotes]="quotes"></app-quote-list>
+<ngx-hm-carousel
+  *ngIf="!isLoading && isMobile"
+  [(ngModel)]="currentIndex"
+  [show-num]="1"
+  [aniTime]="200"
+  [data]="quotes"
+  class="carousel c-accent">
+
+  <section ngx-hm-carousel-container class="content">
+    <article class="item cursor-pointer"
+      ngx-hm-carousel-item
+      *ngFor="let quote of quotes; let i = index"
+        [ngClass]="{'visible': currentIndex===i}">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ quote.created_at | date: 'medium' }}</h5>
+                <p class="card-text">
+                    {{ quote.value }}<br>
+                </p>
+            </div>
+        </div>
+    </article>
+    <ng-template #carouselPrev>
+        <div class="click-area">
+            <span class="fa fa-arrow-left"></span>
+        </div>
+    </ng-template>
+    <ng-template #carouselNext>
+        <div class="click-area">
+            <span class="fa fa-arrow-right"></span>
+        </div>
+    </ng-template>
+    <ng-template #infiniteContainer></ng-template>
+    <ng-template #carouselDot let-model>
+    <div class="ball bg-accent"
+        [class.visible]="model.index === model.currentIndex"></div>
+    </ng-template>
+
+    <ng-template #carouselProgress let-progress>
+    <div class="progress"></div>
+    </ng-template>
+  </section>
+
+  
+
+</ngx-hm-carousel>
