@@ -19,7 +19,7 @@ export class SurpriseDirective {
    * Surprise emitter
    */
   @Output()
-  private surprise: EventEmitter<void>;
+  surprise: EventEmitter<void>;
   /**
    * sequence of strings to check if it deserves the surprise
    */
@@ -36,8 +36,8 @@ export class SurpriseDirective {
    */
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.keyCode) {
-      this.sequence.push(event.keyCode.toString());
+    if (event.code) {
+      this.sequence.push(event.code.toString());
 
       if (this.sequence.length > this.surpriseCode.length) {
         this.sequence.shift();

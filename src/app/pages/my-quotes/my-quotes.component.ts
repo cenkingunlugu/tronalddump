@@ -56,9 +56,7 @@ export class MyQuotesComponent implements OnInit, OnDestroy {
    * Component destroy handler
    */
   ngOnDestroy() {
-    if (this.mainSubscription) {
-      this.mainSubscription.unsubscribe();
-    }
+    this.mainSubscription.unsubscribe();
   }
 
 }

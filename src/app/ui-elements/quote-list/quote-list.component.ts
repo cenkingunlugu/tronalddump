@@ -111,9 +111,6 @@ export class QuoteListComponent implements OnInit {
    * Quote deletion method
    */
   removeMyQuote(quote: QuoteModel) {
-    if (this.isFavorite(quote)) {
-      this.store.dispatch(new favoriteActions.Delete(quote));
-    }
     this.store.dispatch(new myQuoteActions.Delete(quote));
   }
 

@@ -20,6 +20,7 @@ export class ModalService {
    * remove method
    * @param modal to be removed from array of active modals
    */
+  /* istanbul ignore next */
   remove(id: string) {
       this.modals = this.modals.filter(x => x.id !== id);
   }

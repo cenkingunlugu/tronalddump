@@ -24,6 +24,7 @@ export class RouterHelperService {
     this.currentUrl = this.router.url;
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        console.log(event);
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
       }

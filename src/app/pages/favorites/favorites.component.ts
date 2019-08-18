@@ -56,9 +56,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
    * method running on destroy of the component
    */
   ngOnDestroy() {
-    if (this.mainSubscription) {
-      this.mainSubscription.unsubscribe();
-    }
+    this.mainSubscription.unsubscribe();
   }
 
 }

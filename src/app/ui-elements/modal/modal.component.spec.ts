@@ -22,4 +22,14 @@ describe('ModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('open method should work as expected', () => {
+    component.open();
+    expect(document.body.classList.contains('trump-modal-open')).toBe(true);
+  });
+  it('open method should work as expected', () => {
+    component.open();
+    component.close();
+    expect(document.body.classList.contains('trump-modal-open')).toBe(false);
+  });
+
 });

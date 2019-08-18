@@ -41,6 +41,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       document.body.appendChild(this.element);
 
       // close modal on background click
+      /* istanbul ignore next */
       this.element.addEventListener('click', el => {
           if (el.target.className === 'trump-modal') {
               this.close();

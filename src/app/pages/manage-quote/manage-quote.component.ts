@@ -5,15 +5,10 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store/reducers';
 import * as myQuotesActions from '../../store/actions/my-quotes/my-quotes.actions';
-import * as favoritesActions from '../../store/actions/favorites/favorites.actions';
-
 import * as myQuotesReducers from '../../store/reducers/my-quotes/my-quotes.reducer';
-import * as favoritesReducers from '../../store/reducers/favorites/favorites.reducer';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Update } from '@ngrx/entity';
-import { tap } from 'rxjs/operators';
-import { merge } from 'rxjs';
 
 /**
  * Component to add, update MyQuotes
@@ -72,21 +67,14 @@ export class ManageQuoteComponent implements OnInit {
       });
       this.initializeForm();
     } else {
-      const userQuoteStream = this.store.select(myQuotesReducers.getUserEntityById(id)).pipe(tap((quote) => {
+      this.store.select(myQuotesReducers.getUserEntityById(id)).subscribe((quote) => {
         this.quote = quote;
         if (this.quote) {
           this.initializeForm();
         } else {
           this.isQuoteAvailable = false;
         }
-      }));
-      const favoriteQuoteStream = this.store.select(favoritesReducers.getFavoriteEntityById(id)).pipe(tap((quote) => {
-        if (quote) {
-          this.isQuoteFavorited = true;
-        }
-      }));
-
-      merge(userQuoteStream, favoriteQuoteStream).subscribe();
+      });
     }
   }
   /**
@@ -122,9 +110,6 @@ export class ManageQuoteComponent implements OnInit {
           changes: { ...this.quote }
         };
         this.store.dispatch(new myQuotesActions.UpdateOne(quoteUpdate));
-        if (this.isQuoteFavorited) {
-          this.store.dispatch(new favoritesActions.UpdateOne(quoteUpdate));
-        }
       } else {
         this.store.dispatch(new myQuotesActions.AddOne(this.quote));
       }
