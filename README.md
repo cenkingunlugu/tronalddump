@@ -8,7 +8,7 @@ Run `ng serve` or `npm start` for a dev server. Navigate to `http://localhost:42
 
 ## Development server (universal)
 
-Run `build:ssr` for a universal server. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
+Run `npm run build:ssr` to build the app for universal. For a universal server run `npm run serve:ssr` after building for ssr. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
